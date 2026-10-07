@@ -253,8 +253,23 @@
     outline: none;
     transition: border-color 0.2s;
   }
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6l4 4 4-4' stroke='%23c41e1e' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    cursor: pointer;
+  }
+  select:hover {
+    border-color: rgba(196,30,30,0.7);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M4 6l4 4 4-4' stroke='%23ff2a2a' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  }
   input:focus, select:focus { border-color: #c41e1e; }
-  select option { background: #050000; }
+  select option { background: #050000; color: #d4c5a0; padding: 8px; }
   .field { margin-bottom: 14px; }
 
   .costume-box {
@@ -651,7 +666,7 @@
     </div>
 
     <!-- FORM -->
-    <form id="rsvp-form" action="https://formspree.io/f/xbgddylo" method="POST">
+    <form id="rsvp-form" action="https://formspree.io/f/xnpjjvqb" method="POST">
       <div class="form-card">
 
         <div class="progress-row">
