@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A Night of Masks · LUISA Halloween 2026</title>
+<meta name="description" content="RSVP for LUISA's Halloween party. Nothing is as it seems." />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,700;1,9..144,900&family=Inter:wght@400;500;600;700&family=Creepster&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.82; }
+    52% { opacity: 1; }
+    54% { opacity: 0.88; }
+    56% { opacity: 1; }
+  }
+  @keyframes fog {
+    0% { transform: translateX(-30px) translateY(0); }
+    50% { transform: translateX(30px) translateY(-5px); }
+    100% { transform: translateX(-30px) translateY(0); }
+  }
+  @keyframes fog2 {
+    0% { transform: translateX(20px); opacity: 0.3; }
+    50% { transform: translateX(-20px); opacity: 0.5; }
+    100% { transform: translateX(20px); opacity: 0.3; }
+  }
+  @keyframes drip {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+    100% { transform: translateY(0); }
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(196,30,30,0.4); }
+    50% { box-shadow: 0 0 40px rgba(196,30,30,0.7), 0 0 60px rgba(139,0,0,0.4); }
+  }
+  @keyframes bloodPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 4px #c41e1e) drop-shadow(0 0 8px #8B0000);
+      opacity: 0.95;
+    }
+    50% {
+      filter: drop-shadow(0 0 12px #ff1a1a) drop-shadow(0 0 20px #c41e1e) drop-shadow(0 0 30px #8B0000);
+      opacity: 1;
+    }
+  }
+  @keyframes bloodFlash {
+    0%, 92%, 100% {
+      filter: drop-shadow(0 0 6px #c41e1e) drop-shadow(0 0 12px #8B0000);
+    }
+    94% {
+      filter: drop-shadow(0 0 20px #ff2a2a) drop-shadow(0 0 40px #ff1a1a) drop-shadow(0 0 60px #c41e1e);
+    }
+    96% {
+      filter: drop-shadow(0 0 6px #c41e1e) drop-shadow(0 0 12px #8B0000);
+    }
+    98% {
+      filter: drop-shadow(0 0 25px #ff3a3a) drop-shadow(0 0 50px #ff1a1a);
+    }
+  }
+  @keyframes splatterPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 3px #c41e1e);
+      opacity: 0.8;
+    }
+    50% {
+      filter: drop-shadow(0 0 8px #ff1a1a) drop-shadow(0 0 15px #c41e1e);
+      opacity: 1;
+    }
+  }
+  .flicker-text { animation: flicker 4s infinite; }
+  .fog-layer { animation: fog 18s ease-in-out infinite; }
+  .fog-layer-2 { animation: fog2 22s ease-in-out infinite; }
+  .drip-emoji { animation: drip 3s ease-in-out infinite; display: inline-block; }
+  .sway { animation: sway 6s ease-in-out infinite; display: inline-block; }
+  .pulse-glow { animation: pulse 3s ease-in-out infinite; }
+  .blood-pulse { animation: bloodPulse 2.5s ease-in-out infinite; }
+  .blood-flash { animation: bloodFlash 5s ease-in-out infinite; }
+  .splatter-pulse { animation: splatterPulse 3s ease-in-out infinite; }
+
+  .outer {
+    max-width: 560px;
+    width: 100%;
+    background: linear-gradient(135deg, #4a0000 0%, #1a0000 50%, #000 100%);
+    border-radius: 20px;
+    padding: 4px;
+  }
+  .inner {
+    background: #050000;
+    background-image:
+      radial-gradient(ellipse at 20% 25%, rgba(139,0,0,0.45) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(80,0,0,0.5) 0%, transparent 50%),
+      radial-gradient(circle at 50% 100%, rgba(100,0,0,0.35) 0%, transparent 60%),
+      radial-gradient(circle at 10% 90%, rgba(60,0,0,0.5) 0%, transparent 40%);
+    border-radius: 18px;
+    padding: 28px 24px;
+    color: #d4c5a0;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(139,0,0,0.3);
+  }
+
+  .bg-decor { position: absolute; pointer-events: none; }
+  .emoji-decor { position: absolute; pointer-events: none; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #4a0000, #8B0000);
+    color: #d4c5a0;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid rgba(139,0,0,0.5);
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    color: #c41e1e;
+    font-family: 'Creepster', 'Fraunces', cursive;
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-shadow: 0 0 25px rgba(196,30,30,0.7), 0 0 50px rgba(139,0,0,0.5), 2px 2px 0 #000;
+  }
+  h1 span { font-size: 72px; display: inline-block; margin-top: 4px; }
+
+  .subtitle {
+    color: rgba(212,197,160,0.7);
+    margin: 16px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .header { text-align: center; margin-bottom: 22px; position: relative; z-index: 2; }
+
+  .meta-card {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(139,0,0,0.4);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .meta-label {
+    font-size: 10px;
+    color: #8B0000;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .meta-value {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    color: #d4c5a0;
+    font-family: 'Fraunces', serif;
+  }
+
+  .form-card {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(139,0,0,0.35);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .progress-text {
+    font-size: 10px;
+    color: rgba(212,197,160,0.6);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .progress-bar-bg {
+    background: rgba(212,197,160,0.08);
+    height: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, #4a0000, #c41e1e, #8B0000);
+    height: 100%;
+    width: 33%;
+    transition: width 0.4s;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+    color: #d4c5a0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  label .hint {
+    color: rgba(212,197,160,0.5);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  input[type="text"], input[type="email"], input[type="tel"], select {
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(139,0,0,0.4);
+    color: #d4c5a0;
+    padding: 11px 13px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus { border-color: #c41e1e; }
+  select option { background: #050000; }
+  .field { margin-bottom: 14px; }
+
+  .costume-box {
+    background: linear-gradient(135deg, rgba(74,0,0,0.5), rgba(0,0,0,0.4));
+    border: 1px solid rgba(196,30,30,0.5);
+    border-radius: 6px;
+    padding: 14px;
+  }
+  .costume-box label { color: #c41e1e; letter-spacing: 1.5px; }
+  .costume-box .req { color: #FF9A7A; font-weight: 500; text-transform: none; letter-spacing: 0; }
+  .costume-box input {
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(196,30,30,0.4);
+  }
+  .costume-hint {
+    font-size: 11px;
+    color: rgba(212,197,160,0.6);
+    margin: 8px 0 0;
+    font-style: italic;
+  }
+
+  .drink-box {
+    background: linear-gradient(135deg, rgba(74,0,0,0.3), rgba(0,0,0,0.4));
+    border: 1px solid rgba(196,30,30,0.35);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .drink-box label { color: #c41e1e; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .drink-options { display: flex; gap: 8px; }
+  .drink-option {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(139,0,0,0.4);
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: #d4c5a0;
+    margin-bottom: 0;
+  }
+  .drink-option input { margin-top: 3px; }
+  .drink-option strong { color: #d4c5a0; }
+  .drink-option .alcohol strong { color: #c41e1e; }
+  .drink-option p {
+    font-size: 11px;
+    color: rgba(212,197,160,0.6);
+    margin: 2px 0 0;
+  }
+
+  .payment-zone {
+    background: linear-gradient(135deg, rgba(74,0,0,0.5), rgba(0,0,0,0.7));
+    border: 2px solid rgba(196,30,30,0.5);
+    border-radius: 6px;
+    padding: 18px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .payment-title {
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: #c41e1e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .payment-sub {
+    font-size: 12px;
+    margin: 0 0 16px;
+    color: rgba(212,197,160,0.75);
+    font-style: italic;
+  }
+  .toll-label, .send-to-label {
+    font-size: 10px;
+    margin: 0;
+    color: rgba(212,197,160,0.65);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .toll-amount {
+    font-size: 52px;
+    font-weight: 900;
+    margin: 4px 0 12px;
+    color: #c41e1e;
+    font-family: 'Fraunces', serif;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(196,30,30,0.7);
+  }
+  .recipient {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 2px;
+    color: #d4c5a0;
+    font-family: 'Fraunces', serif;
+  }
+  .copy-btn {
+    margin-top: 10px;
+    width: 100%;
+    background: linear-gradient(90deg, #4a0000, #8B0000);
+    border: 1px solid rgba(196,30,30,0.6);
+    color: #d4c5a0;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(139,0,0,0.4);
+  }
+  .copy-hint {
+    font-size: 11px;
+    color: rgba(212,197,160,0.55);
+    margin: 8px 0 0;
+    font-style: italic;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #d4c5a0;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .checkbox-row input { margin-top: 3px; }
+
+  .gate-banner {
+    margin-top: 12px;
+    background: rgba(74,0,0,0.3);
+    border: 1px solid rgba(196,30,30,0.3);
+    border-radius: 4px;
+    padding: 10px 12px;
+    transition: all 0.3s;
+  }
+  .gate-text {
+    font-size: 12px;
+    margin: 0;
+    color: #c41e1e;
+    font-style: italic;
+  }
+  .gate-banner.error { background: rgba(244,67,54,0.2); border-color: rgba(244,67,54,0.4); }
+  .gate-banner.error .gate-text { color: #FF9A7A; }
+  .gate-banner.success { background: rgba(100,0,0,0.4); border-color: rgba(196,30,30,0.5); }
+  .gate-banner.success .gate-text { color: #A8E6A3; }
+
+  .conf-hint { font-size: 11px; color: rgba(212,197,160,0.55); margin: 6px 0 0; }
+
+  .nav-row { display: flex; justify-content: space-between; margin-top: 24px; gap: 10px; }
+  .nav-btn {
+    flex: 1;
+    padding: 13px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .nav-back {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(139,0,0,0.4);
+    color: #d4c5a0;
+  }
+  .nav-next {
+    background: linear-gradient(90deg, #4a0000, #8B0000);
+    border: 1px solid rgba(196,30,30,0.6);
+    color: #d4c5a0;
+    box-shadow: 0 0 20px rgba(139,0,0,0.4);
+  }
+  .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .volunteer-box {
+    margin-bottom: 14px;
+  }
+  .refund-box {
+    background: rgba(139,0,0,0.25);
+    border: 1px dashed rgba(196,30,30,0.5);
+    border-radius: 4px;
+    padding: 12px;
+    margin-top: 16px;
+  }
+  .refund-text {
+    font-size: 12px;
+    margin: 0;
+    color: #c41e1e;
+    font-style: italic;
+  }
+
+  .footer-help {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(212,197,160,0.5);
+    margin: 18px 0 0;
+    font-style: italic;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-help a {
+    color: #c41e1e;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .footer-help a:hover { text-decoration: underline; }
+
+  .success-screen { text-align: center; padding: 40px 10px; position: relative; z-index: 2; }
+  .success-icon { font-size: 70px; margin-bottom: 16px; }
+  .success-title {
+    font-size: 36px;
+    margin: 0 0 10px;
+    color: #c41e1e;
+    font-family: 'Creepster', cursive;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(196,30,30,0.6);
+  }
+  .success-msg {
+    color: rgba(212,197,160,0.8);
+    margin: 0 0 12px;
+    font-size: 14px;
+  }
+  .error-msg {
+    background: rgba(244,67,54,0.15);
+    border: 1px solid rgba(244,67,54,0.4);
+    border-radius: 4px;
+    padding: 10px;
+    color: #FF9A7A;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="outer">
+  <div class="inner" id="form-container">
+
+    <!-- FLASHING BLOOD DRIPS in header - more visible with glow animations -->
+    <svg class="bg-decor" style="top: 0; left: 0; width: 100%; height: 320px; z-index: 1;" viewBox="0 0 400 320" preserveAspectRatio="none">
+      <g class="blood-flash">
+        <path d="M 50 0 Q 46 25 54 55 Q 60 85 48 115 Q 42 145 52 175 L 48 180 Q 44 185 52 188 Q 60 185 56 180 Z" fill="#c41e1e"/>
+        <circle cx="52" cy="188" r="4" fill="#ff1a1a"/>
+      </g>
+      <g class="blood-pulse">
+        <path d="M 130 0 Q 126 20 132 42 Q 138 65 128 88 Q 122 110 130 130 L 126 134 Q 122 138 130 141 Q 138 138 134 134 Z" fill="#c41e1e"/>
+        <circle cx="130" cy="141" r="3" fill="#ff2a2a"/>
+      </g>
+      <g class="blood-flash" style="animation-delay: 1s;">
+        <path d="M 200 0 Q 194 30 206 65 Q 214 100 200 135 Q 192 170 204 200 Q 212 225 200 245 L 196 250 Q 192 255 202 258 Q 212 255 208 250 Z" fill="#c41e1e"/>
+        <circle cx="202" cy="258" r="5" fill="#ff3a3a"/>
+      </g>
+      <g class="blood-pulse" style="animation-delay: 0.5s;">
+        <path d="M 275 0 Q 272 20 278 42 Q 282 65 276 85 L 272 90 Q 268 93 276 96 Q 284 93 280 90 Z" fill="#c41e1e"/>
+        <circle cx="276" cy="96" r="3" fill="#ff2a2a"/>
+      </g>
+      <g class="blood-flash" style="animation-delay: 2s;">
+        <path d="M 350 0 Q 346 30 356 65 Q 362 100 352 135 Q 346 170 356 200 L 352 205 Q 348 210 356 213 Q 364 210 360 205 Z" fill="#c41e1e"/>
+        <circle cx="356" cy="213" r="4" fill="#ff2a2a"/>
+      </g>
+      <g class="blood-pulse" style="animation-delay: 1.5s;">
+        <path d="M 380 0 Q 378 15 382 32 L 380 36 Q 378 39 382 42 Z" fill="#c41e1e"/>
+        <circle cx="381" cy="42" r="2" fill="#ff2a2a"/>
+      </g>
+      <g class="blood-pulse" style="animation-delay: 2.5s;">
+        <path d="M 20 0 Q 18 18 22 38 L 20 42 Q 18 45 22 48 Z" fill="#c41e1e"/>
+        <circle cx="21" cy="48" r="2" fill="#ff2a2a"/>
+      </g>
+    </svg>
+
+    <!-- Pulsing splatters near title -->
+    <svg class="bg-decor splatter-pulse" style="top: 80px; left: 30px; width: 80px; height: 80px; z-index: 1;" viewBox="0 0 80 80">
+      <circle cx="20" cy="30" r="5" fill="#c41e1e"/>
+      <circle cx="30" cy="38" r="2.5" fill="#ff1a1a"/>
+      <circle cx="12" cy="42" r="1.8" fill="#c41e1e"/>
+      <circle cx="35" cy="22" r="1.5" fill="#ff1a1a"/>
+    </svg>
+
+    <svg class="bg-decor splatter-pulse" style="top: 90px; right: 40px; width: 80px; height: 80px; z-index: 1; animation-delay: 1s;" viewBox="0 0 80 80">
+      <circle cx="55" cy="35" r="6" fill="#c41e1e"/>
+      <circle cx="45" cy="42" r="3" fill="#ff1a1a"/>
+      <circle cx="62" cy="48" r="2" fill="#c41e1e"/>
+      <circle cx="48" cy="26" r="1.5" fill="#ff1a1a"/>
+    </svg>
+
+    <!-- Lower-page static blood splatters (unchanged for background texture) -->
+    <svg class="bg-decor" style="top: 400px; left: 0; width: 100%; height: 100%; opacity: 0.35; z-index: 1;" viewBox="0 0 400 800" preserveAspectRatio="none">
+      <circle cx="30" cy="100" r="6" fill="#8B0000" opacity="0.6"/>
+      <circle cx="38" cy="108" r="3" fill="#8B0000" opacity="0.5"/>
+      <circle cx="24" cy="110" r="1.5" fill="#8B0000" opacity="0.4"/>
+      <circle cx="370" cy="200" r="4" fill="#8B0000" opacity="0.6"/>
+      <circle cx="378" cy="208" r="2" fill="#8B0000" opacity="0.5"/>
+      <circle cx="200" cy="350" r="5" fill="#8B0000" opacity="0.6"/>
+      <circle cx="208" cy="360" r="2.5" fill="#8B0000" opacity="0.5"/>
+      <circle cx="192" cy="362" r="1.5" fill="#8B0000" opacity="0.4"/>
+      <circle cx="60" cy="500" r="4" fill="#8B0000" opacity="0.5"/>
+      <circle cx="68" cy="508" r="2" fill="#8B0000" opacity="0.4"/>
+    </svg>
+
+    <!-- Spider webs -->
+    <svg class="bg-decor" style="top: -5px; left: -5px; width: 140px; height: 140px; opacity: 0.4;" viewBox="0 0 140 140">
+      <g stroke="#d4c5a0" stroke-width="0.6" fill="none" opacity="0.7">
+        <line x1="0" y1="0" x2="140" y2="30"/>
+        <line x1="0" y1="0" x2="140" y2="70"/>
+        <line x1="0" y1="0" x2="140" y2="110"/>
+        <line x1="0" y1="0" x2="110" y2="140"/>
+        <line x1="0" y1="0" x2="70" y2="140"/>
+        <line x1="0" y1="0" x2="30" y2="140"/>
+        <path d="M 25 0 Q 18 18 0 25" stroke-width="0.5"/>
+        <path d="M 50 0 Q 36 36 0 50" stroke-width="0.5"/>
+        <path d="M 80 0 Q 56 56 0 80" stroke-width="0.5"/>
+        <path d="M 115 0 Q 80 80 0 115" stroke-width="0.5"/>
+      </g>
+    </svg>
+
+    <svg class="bg-decor" style="top: -5px; right: -5px; width: 140px; height: 140px; opacity: 0.4;" viewBox="0 0 140 140">
+      <g stroke="#d4c5a0" stroke-width="0.6" fill="none" opacity="0.7">
+        <line x1="140" y1="0" x2="0" y2="30"/>
+        <line x1="140" y1="0" x2="0" y2="70"/>
+        <line x1="140" y1="0" x2="0" y2="110"/>
+        <line x1="140" y1="0" x2="30" y2="140"/>
+        <line x1="140" y1="0" x2="70" y2="140"/>
+        <line x1="140" y1="0" x2="110" y2="140"/>
+        <path d="M 115 0 Q 122 18 140 25" stroke-width="0.5"/>
+        <path d="M 90 0 Q 104 36 140 50" stroke-width="0.5"/>
+        <path d="M 60 0 Q 84 56 140 80" stroke-width="0.5"/>
+        <path d="M 25 0 Q 60 80 140 115" stroke-width="0.5"/>
+      </g>
+    </svg>
+
+    <svg class="bg-decor" style="bottom: -5px; right: -5px; width: 120px; height: 120px; opacity: 0.35;" viewBox="0 0 120 120">
+      <g stroke="#d4c5a0" stroke-width="0.5" fill="none" opacity="0.6">
+        <line x1="120" y1="120" x2="0" y2="90"/>
+        <line x1="120" y1="120" x2="0" y2="50"/>
+        <line x1="120" y1="120" x2="30" y2="0"/>
+        <line x1="120" y1="120" x2="70" y2="0"/>
+        <path d="M 100 120 Q 108 100 120 92" stroke-width="0.4"/>
+        <path d="M 75 120 Q 92 85 120 68" stroke-width="0.4"/>
+        <path d="M 45 120 Q 75 65 120 45" stroke-width="0.4"/>
+      </g>
+    </svg>
+
+    <!-- Fog layers -->
+    <div class="fog-layer bg-decor" style="top: 0; left: 0; right: 0; height: 100px; background: linear-gradient(180deg, rgba(80,0,0,0.4), transparent);"></div>
+    <div class="fog-layer-2 bg-decor" style="bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(0deg, rgba(60,0,0,0.4), transparent);"></div>
+
+    <!-- Floating emojis -->
+    <div class="sway emoji-decor" style="top: 100px; right: 20px; font-size: 20px; opacity: 0.5;">🕷️</div>
+    <div class="emoji-decor" style="top: 300px; left: 10px; font-size: 16px; opacity: 0.4;">🦇</div>
+    <div class="emoji-decor" style="bottom: 200px; right: 15px; font-size: 18px; opacity: 0.5;">🕯️</div>
+    <div class="sway emoji-decor" style="bottom: 400px; left: 15px; font-size: 18px; opacity: 0.4;">🕷️</div>
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="badge">⚰️ LUISA · Oct 2026</div>
+      <h1 class="flicker-text">A Night of<br/><span>Masks</span></h1>
+      <p class="subtitle">Nothing is as it seems <span class="drip-emoji">🩸</span></p>
+    </div>
+
+    <!-- EVENT META -->
+    <div class="meta-card">
+      <div class="meta-grid">
+        <div>
+          <p class="meta-label">⚰️ Date</p>
+          <p class="meta-value">Fri · Oct 23</p>
+        </div>
+        <div>
+          <p class="meta-label">🌙 Hour</p>
+          <p class="meta-value">8 PM – 1 AM</p>
+        </div>
+        <div>
+          <p class="meta-label">🗝️ Location</p>
+          <p class="meta-value">Society Hill CR</p>
+        </div>
+        <div>
+          <p class="meta-label">🩸 Toll</p>
+          <p class="meta-value">From $12</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form id="rsvp-form" action="https://formspree.io/f/xqejovry" method="POST">
+      <div class="form-card">
+
+        <div class="progress-row">
+          <p class="progress-text">Chapter <span id="step-num">1</span> / 3</p>
+          <p class="progress-text" id="step-label">Who dares enter?</p>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div id="step-1" class="step-panel">
+          <div class="field">
+            <label>👤 Thy name</label>
+            <input id="f-name" name="name" type="text" placeholder="Who shall we expect?" oninput="checkStep1()" required />
+          </div>
+          <div class="field">
+            <label>📧 Scroll address</label>
+            <input id="f-email" name="email" type="email" placeholder="yourname@lehigh.edu" oninput="checkStep1()" required />
+          </div>
+          <div class="field">
+            <label>📱 Summoning line <span class="hint">(for day-of updates)</span></label>
+            <input id="f-phone" name="phone" type="tel" placeholder="(610) 555-0123" oninput="checkStep1()" required />
+          </div>
+          <div class="field">
+            <label>🎓 Thy order</label>
+            <select name="affiliation" required>
+              <option>Lehigh undergraduate</option>
+              <option>Lehigh graduate</option>
+              <option>Lehigh faculty / staff</option>
+              <option>Lehigh alum</option>
+              <option>Community guest</option>
+            </select>
+          </div>
+          <div class="costume-box">
+            <label>⚠️ COSTUME REQUIRED</label>
+            <p style="font-size: 13px; color: #d4c5a0; margin: 0 0 10px; line-height: 1.5;">This is a costume-only night. <strong style="color: #c41e1e;">Guests who arrive without a costume will be turned away at the gate</strong> — no refunds. Even a mask, face paint, or themed accessory counts. 🩸</p>
+            <label class="checkbox-row" style="color: #d4c5a0;">
+              <input id="f-costume-consent" name="costume_consent" type="checkbox" value="Yes" onchange="checkStep1()" />
+              <span>🕯️ I understand I must arrive in costume. If I show up without one, I accept that I'll be turned away and will not receive a refund.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step-2" class="step-panel" style="display:none;">
+          <div class="field">
+            <label>👥 Who's coming?</label>
+            <select id="group-size" name="group_size" onchange="recalcToll(); checkStep2()">
+              <option value="1">Just me 🕯️</option>
+              <option value="2">Me + 1 shadow 👥</option>
+            </select>
+            <p class="costume-hint" style="margin-top: 6px;">One guest max per RSVP.</p>
+          </div>
+
+          <div class="drink-box">
+            <label>🍷 My drink package</label>
+            <div class="drink-options">
+              <label class="drink-option">
+                <input type="radio" name="my_drink" value="$12 Dry" checked onchange="recalcToll()" />
+                <div>
+                  <strong>$12 · Dry</strong>
+                  <p>Mocktails only</p>
+                </div>
+              </label>
+              <label class="drink-option alcohol">
+                <input type="radio" name="my_drink" value="$15 Full bar" onchange="recalcToll()" />
+                <div>
+                  <strong>$15 · Full bar</strong>
+                  <p>21+ only 🩸</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div id="partner1-block" class="drink-box" style="display:none;">
+            <label>🍷 My shadow's drink package</label>
+            <div class="drink-options">
+              <label class="drink-option">
+                <input type="radio" name="partner_drink" value="$12 Dry" checked onchange="recalcToll()" />
+                <div>
+                  <strong>$12 · Dry</strong>
+                  <p>Mocktails only</p>
+                </div>
+              </label>
+              <label class="drink-option alcohol">
+                <input type="radio" name="partner_drink" value="$15 Full bar" onchange="recalcToll()" />
+                <div>
+                  <strong>$15 · Full bar</strong>
+                  <p>21+ only 🩸</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="pulse-glow payment-zone">
+            <p class="payment-title">💰 Send the toll via Zelle</p>
+            <p class="payment-sub">Open your bank app, send the exact amount below. ⚡</p>
+            <p class="toll-label">The toll</p>
+            <p class="toll-amount flicker-text" id="qr-amount">$12.00</p>
+            <input type="hidden" name="total_amount" id="total-amount-hidden" value="$12.00" />
+            <p class="send-to-label">Send to</p>
+            <p class="recipient">Morteza Ghorashi</p>
+            <button type="button" class="copy-btn" onclick="copyZelle()">
+              📋 <span id="copy-text">484-937-1251</span>
+            </button>
+            <p class="copy-hint">Tap to copy · Inscribe thy name in the Zelle memo ✍️</p>
+          </div>
+
+          <div class="field">
+            <label>🔢 Receipt from the beyond</label>
+            <input id="f-conf" name="zelle_confirmation" type="text" placeholder="e.g. CONF20261023A12 or 2026102312345" oninput="checkStep2()" />
+            <p class="conf-hint">At least 8 characters. Find it in your Zelle email or history.</p>
+          </div>
+
+          <label class="checkbox-row">
+            <input id="f-check" name="payment_confirmed" type="checkbox" value="Yes" onchange="checkStep2()" />
+            <span>🩸 I swear upon the dark that I sent the exact toll via Zelle, with my full name in the memo.</span>
+          </label>
+
+          <div id="gate-banner" class="gate-banner">
+            <p id="gate-text" class="gate-text">🩸 Send $12 to the number above via Zelle, then enter thy receipt below.</p>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div id="step-3" class="step-panel" style="display:none;">
+          <div class="volunteer-box">
+            <label class="checkbox-row">
+              <input name="volunteer" type="checkbox" value="Yes" />
+              <span style="font-weight:600;">⚰️ Enlist me to prepare the ritual — setup, decor, or cleanup</span>
+            </label>
+            <p class="conf-hint" style="margin-left:24px; font-style: italic;">A fellow conspirator will summon you before the night. 💌</p>
+          </div>
+
+          <div class="refund-box">
+            <p class="refund-text">⚠️ No refunds past Oct 18. The dead do not return. But you may pass thy spot to another cursed soul. 👻</p>
+          </div>
+
+          <div class="error-msg" id="error-msg"></div>
+        </div>
+
+        <div class="nav-row">
+          <button type="button" id="back-btn" class="nav-btn nav-back" onclick="changeStep(-1)" disabled>← Retreat</button>
+          <button type="button" id="next-btn" class="nav-btn nav-next" onclick="changeStep(1)" disabled>Proceed →</button>
+        </div>
+      </div>
+    </form>
+
+    <p class="footer-help">If you dare, summon me on Telegram <a href="https://t.me/maral20173" target="_blank">@maral20173</a> 💀</p>
+  </div>
+</div>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 3;
+  const stepLabels = ['Who dares enter?', 'Pay the toll', 'Seal the pact'];
+
+  // ============================================================
+  // CONFIGURATION
+  // ============================================================
+  const ZELLE_PHONE = '484-937-1251';
+  // ============================================================
+
+  function setNextEnabled(enabled) {
+    const btn = document.getElementById('next-btn');
+    btn.disabled = !enabled;
+  }
+
+  function checkStep1() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const costumeConsent = document.getElementById('f-costume-consent').checked;
+    const ok = name.length > 1 && email.includes('@') && phone.length >= 7 && costumeConsent;
+    setNextEnabled(ok);
+  }
+
+  function recalcToll() {
+    const size = parseInt(document.getElementById('group-size').value);
+    const myDrinkVal = document.querySelector('input[name="my_drink"]:checked').value;
+    const myDrink = myDrinkVal.includes('15') ? 15 : 12;
+    let total = myDrink;
+
+    const p1Block = document.getElementById('partner1-block');
+
+    if (size >= 2) {
+      p1Block.style.display = 'block';
+      const p1DrinkVal = document.querySelector('input[name="partner_drink"]:checked').value;
+      const p1Drink = p1DrinkVal.includes('15') ? 15 : 12;
+      total += p1Drink;
+    } else {
+      p1Block.style.display = 'none';
+    }
+
+    const totalStr = '$' + total.toFixed(2);
+    document.getElementById('qr-amount').textContent = totalStr;
+    document.getElementById('total-amount-hidden').value = totalStr;
+  }
+
+  function checkStep2() {
+    const total = parseFloat(document.getElementById('qr-amount').textContent.replace('$', ''));
+    const conf = document.getElementById('f-conf').value.trim();
+    const checked = document.getElementById('f-check').checked;
+    const confValid = /^[a-zA-Z0-9]{8,}$/.test(conf);
+
+    const gateBanner = document.getElementById('gate-banner');
+    const gateText = document.getElementById('gate-text');
+
+    gateBanner.classList.remove('error', 'success');
+
+    if (!conf) {
+      gateText.innerHTML = '🩸 Send $' + total + ' via Zelle to the number above, then enter thy receipt below.';
+    } else if (!confValid) {
+      gateText.innerHTML = '⚠️ The receipt is false — must be 8+ characters (letters or numbers).';
+      gateBanner.classList.add('error');
+    } else if (!checked) {
+      gateText.innerHTML = '🕯️ One last oath — swear the pact below to proceed.';
+    } else {
+      gateText.innerHTML = '💀 The toll is paid. Proceed to seal the pact.';
+      gateBanner.classList.add('success');
+    }
+
+    setNextEnabled(confValid && checked);
+  }
+
+  function runStepCheck() {
+    if (currentStep === 1) checkStep1();
+    else if (currentStep === 2) checkStep2();
+    else setNextEnabled(true);
+  }
+
+  function changeStep(direction) {
+    const next = currentStep + direction;
+
+    if (next > totalSteps) {
+      submitForm();
+      return;
+    }
+    if (next < 1) return;
+
+    document.getElementById('step-' + currentStep).style.display = 'none';
+    currentStep = next;
+    document.getElementById('step-' + currentStep).style.display = 'block';
+    document.getElementById('step-num').textContent = currentStep;
+    document.getElementById('step-label').textContent = stepLabels[currentStep - 1];
+    document.getElementById('progress-bar').style.width = (currentStep / totalSteps * 100) + '%';
+
+    document.getElementById('back-btn').disabled = currentStep === 1;
+    document.getElementById('next-btn').innerHTML = currentStep === totalSteps ? 'Seal the Pact 💀' : 'Proceed →';
+
+    runStepCheck();
+  }
+
+  function copyZelle() {
+    navigator.clipboard?.writeText(ZELLE_PHONE);
+    const textEl = document.getElementById('copy-text');
+    textEl.textContent = 'Copied! ✓';
+    setTimeout(() => { textEl.textContent = ZELLE_PHONE; }, 1500);
+  }
+
+  async function submitForm() {
+    const form = document.getElementById('rsvp-form');
+    const errorEl = document.getElementById('error-msg');
+    const nextBtn = document.getElementById('next-btn');
+    errorEl.style.display = 'none';
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = 'Sealing...';
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        showSuccess();
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      errorEl.textContent = '⚠️ The ritual failed. Try again, or summon me on Telegram @maral20173.';
+      errorEl.style.display = 'block';
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = 'Seal the Pact 💀';
+    }
+  }
+
+  function showSuccess() {
+    document.getElementById('form-container').innerHTML = `
+      <div class="success-screen">
+        <div class="success-icon">💀</div>
+        <h1 class="success-title">Thy name is written</h1>
+        <p class="success-msg">Thy spot is reserved in the ledger of the damned.</p>
+        <p class="success-msg">Morteza shall verify thy toll within 48 hours.</p>
+        <p class="success-msg">See you after dark · Fri, Oct 23 · 8 PM 🕯️</p>
+        <p class="success-msg" style="margin-top: 24px; font-size: 12px; font-style: italic;">If the ritual fails, summon me on Telegram <a href="https://t.me/maral20173" target="_blank" style="color: #c41e1e;">@maral20173</a> 💬</p>
+      </div>
+    `;
+  }
+
+  // Initialize
+  recalcToll();
+  checkStep1();
+</script>
+</body>
+</html>
