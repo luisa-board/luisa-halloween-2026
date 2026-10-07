@@ -865,6 +865,11 @@
     const totalStr = '$' + total.toFixed(2);
     document.getElementById('qr-amount').textContent = totalStr;
     document.getElementById('total-amount-hidden').value = totalStr;
+
+    // Also refresh the gate banner so it shows the current total
+    if (document.getElementById('f-conf')) {
+      checkStep2();
+    }
   }
 
   function checkStep2() {
